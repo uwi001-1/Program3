@@ -23,3 +23,19 @@ Course::Course(string id, string name, int capacity)
 }
 
 //Copy constructor
+Course::Course(const Course& other)
+{
+
+}
+
+//Assignment Operator
+Course::Course& operator=(const Course& other)
+{
+
+}
+
+//Destructor
+Course::~Course()
+{
+
+}
