@@ -1,5 +1,6 @@
 #include "program3.h"
 
+
 //Default Constructor
 Course::Course()
 {
@@ -28,20 +29,50 @@ Course::Course(const Course& other)
     szCourseID = other.szCourseID;
     szCourseName = other.szCourseName;
     iMaxStudents = other.iMaxStudents;
+    iNumEnrolled = other.iNumEnrolled;
 
+    //create dynamic array
+    studentEnrolled = new Student[iMaxStudents];
+
+    //copy info over
+    for(int i=0; i<iNumEnrolled; i++)
+    {
+        studentEnrolled[i] = other.studentEnrolled[i];
+    }
 
 }
 
 //Assignment Operator
-Course::Course& operator=(const Course& other)
+Course& Course::operator=(const Course& other)
 {
+    //avoid self-assignment
+    if(this == &other)
+    {
+        return *this;
+    }
 
+    //free old memory
+    delete[] studentEnrolled;
+
+    //populate new info
+    szCourseID = other.szCourseID;
+    szCourseName = other.szCourseName;
+    iMaxStudents = other.iMaxStudents;
+    iNumEnrolled = other.iNumEnrolled;
+    studentEnrolled = new Student[iMaxStudents];
+    for(int i=0; i<iNumEnrolled; i++)
+    {
+        studentEnrolled[i] = other.studentEnrolled[i];
+    }
+
+    //return new obj
+    return *this;
 }
 
 //Destructor
 Course::~Course()
 {
-
+    delete[] studentEnrolled;
 }
 
 
