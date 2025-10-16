@@ -79,7 +79,7 @@ Course::~Course()
 /*********************************************************************
 string getCourseInfo();
 Purpose:
-    Return a string containing course ID and name, seperated by a colon with a space(: ) and capacity and enrollement eg: A00000000: Test Student.
+    Return a string containing course ID and name, seperated by a colon with a space(: ) and capacity and enrollement.
 Parameters:
     - 
 Return Value:
@@ -87,9 +87,9 @@ Return Value:
 Notes:
     String concatenation has been used for the return.
 *********************************************************************/
-string getCourseInfo()
+string Course::getCourseInfo()
 {
-
+    return szCourseID + ": " + szCourseName + "/nCapacity: " + to_string(iMaxStudents) + "/nEnrollment: " + to_string(iNumEnrolled); 
 }
 
 
@@ -100,7 +100,7 @@ Purpose:
 Parameters:
     - 
 Return Value:
-    Returns the formatted string
+    Returns 
 Notes:
     String concatenation has been used for the return.
 *********************************************************************/
