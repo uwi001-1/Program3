@@ -3,76 +3,76 @@
 /*********************************************************************
 void processCourseInformation(ifstream& fileInput, Course* courseArr, Student* studentArr, int& courseCount, int& studentCount);
 Purpose:
-    Description of the purpose of the function.
+    Loop through the text file and process each file into the respective arrays.
 Parameters:
     List each of each parameter including data type and description. 
-    Each item should begin with whether the parameter is passed in, out or both.
-    I Passed in. 
-    O Passed out.
-    I/O Modified. 
+    I/O ifstream& fileInput -- read the file input
+	I/O Course* courseArr -- dynamically allocated array for course 
+	I/O Student* studentArr -- dynamically allocated array for student 
+	I/O int& courseCount -- number of courses
+	I/O int& studentCount -- number of students
 Return Value:
-    List of values returned by the function, excluding parameters.
+	-
 Notes:
-    Description of any special information regarding this function. 
-    This is a good place to state any assumptions the function makes.
+    Loops till eof so reads the course info, the capacity and then the student info.
 *********************************************************************/
 void processCourseInformation(ifstream& fileInput, Course* courseArr, Student* studentArr, int& courseCount, int& studentCount)
 {
     courseCount = 0;
     studentCount = 0;
 
-    string szLine, szCID, szCName;
+    string szLine;
 
     //read the entire line
-    getline(fileInput, szLine);
-
-    istringstream stream(szLine);
-
-    //1st token
-    stream >> szCID;
-
-    //for the rest of the tokens
-    string szTemp;
-    while(stream >> szTemp)
-    {
-        szCName += szTemp + " ";
-    }
-    //remove space at the end
-    szCName.pop_back();
-
-    int iCap;
-    fileInput >> iCap;
-
-    courseArr[courseCount] = Course(szCID, szCName, iCap);
-    courseCount++;
-
-
-    //Reading the students now
     while(getline(fileInput, szLine))
     {
-        if(szLine == "*********************")
-            break;
-
-        string szSID, szSName;
-
-        //read the entire line
-        getline(fileInput, szLine);
+        string szCID, szCName;
 
         istringstream stream(szLine);
 
         //1st token
-        stream >> szSID;
+        stream >> szCID;
 
         //for the rest of the tokens
         string szTemp;
         while(stream >> szTemp)
         {
-            szSName += szTemp + " ";
+            szCName += szTemp + " ";
         }
         //remove space at the end
-        szSName.pop_back();
+        szCName.pop_back();
 
-        studentArr[studentCount] = Student(szSID, szSName);
-        studentCount++;
+        int iCap;
+        fileInput >> iCap;
+        fileInput.ignore();
+
+        courseArr[courseCount] = Course(szCID, szCName, iCap);
+        courseCount++;
+
+        //Reading the students now
+        while(getline(fileInput, szLine))
+        {
+            if(szLine == "*********************")
+                break;
+
+            string szSID, szSName;
+            istringstream stream(szLine);
+
+            //1st token
+            stream >> szSID;
+
+            //for the rest of the tokens
+            string szTemp;
+            while(stream >> szTemp)
+            {
+                szSName += szTemp + " ";
+            }
+            //remove space at the end
+            szSName.pop_back();
+
+            studentArr[studentCount] = Student(szSID, szSName);
+            courseArr[courseCount-1].enrollStudent(studentArr[studentCount]);
+            studentCount++;
+        }
     }
 }

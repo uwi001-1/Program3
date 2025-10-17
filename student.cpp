@@ -15,18 +15,32 @@ Student::Student(string id, string name)
     szStudentName = name;
 }
 
-//Copy Constructor
+
+//Copy constructor
+/*********************************************************************
+Student(const Student& other)
+Purpose:
+    Create new object by copying another object of same class.
+Parameters:
+    I const Student& other  -- the existing object
+Return Value:
+    -
+Notes:
+    Creates new memory and copies data
+*********************************************************************/
 Student::Student(const Student& other)
 {
     szStudentID = other.szStudentID;
     szStudentName = other.szStudentName;
 }
 
+
 //Destructor
 Student::~Student()
 {
-    cout << "Destructor called" << endl;
+    //No dynamic memory to release
 }
+
 
 /*********************************************************************
 string getStudentInfo();

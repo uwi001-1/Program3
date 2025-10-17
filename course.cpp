@@ -23,13 +23,14 @@ Course::Course(string id, string name, int capacity)
     iNumEnrolled = 0;
 }
 
+
 //Copy constructor
 /*********************************************************************
 Course(const Course& other);
 Purpose:
     Create new object by copying another object of same class.
 Parameters:
-    const Course& other  -- the existing object
+    I const Course& other  -- the existing object
 Return Value:
     -
 Notes:
@@ -53,13 +54,14 @@ Course::Course(const Course& other)
 
 }
 
+
 //Assignment Operator
 /*********************************************************************
 Course& operator=(const Course& other);
 Purpose:
     Allocates new memory for the new object and deallocate the old memory
 Parameters:
-    const Course& other  -- the existing object
+    I const Course& other  -- the existing object
 Return Value:
     Returns the new object
 Notes:
@@ -90,6 +92,7 @@ Course& Course::operator=(const Course& other)
     //return new obj
     return *this;
 }
+
 
 //Destructor
 Course::~Course()
@@ -158,11 +161,13 @@ Notes:
 void Course::displayStudents()
 {
     string szCourseInfo = getCourseInfo();
+    cout << "Students enrolled in " << endl;
     cout << szCourseInfo << endl;
 
     for(int i=0; i<iNumEnrolled; i++)
     {
         string szStudentInfo = studentEnrolled[i].getStudentInfo();
+        cout << "-" << endl;
         cout << szStudentInfo << endl;
     }
 
@@ -190,7 +195,8 @@ void Course::increaseMaxEnrollment(int additionalCapacity)
     int iNewCapacity = iMaxStudents + additionalCapacity;
     Student* newArray = new Student[iNewCapacity];
 
-    for (int i = 0; i < iNumEnrolled; ++i) {
+    for (int i = 0; i < iNumEnrolled; ++i) 
+	{
         newArray[i] = studentEnrolled[i];
     }
 
