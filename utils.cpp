@@ -5,8 +5,7 @@ void processCourseInformation(ifstream& fileInput, Course* courseArr, Student* s
 Purpose:
     Loop through the text file and process each file into the respective arrays.
 Parameters:
-    List each of each parameter including data type and description. 
-    I/O ifstream& fileInput -- read the file input
+    I ifstream& fileInput -- read the file input
 	I/O Course* courseArr -- dynamically allocated array for course 
 	I/O Student* studentArr -- dynamically allocated array for student 
 	I/O int& courseCount -- number of courses
