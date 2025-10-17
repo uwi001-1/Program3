@@ -24,6 +24,17 @@ Course::Course(string id, string name, int capacity)
 }
 
 //Copy constructor
+/*********************************************************************
+Course(const Course& other);
+Purpose:
+    Create new object by copying another object of same class.
+Parameters:
+    const Course& other  -- the existing object
+Return Value:
+    -
+Notes:
+    Creates new memory and copies data
+*********************************************************************/
 Course::Course(const Course& other)
 {
     szCourseID = other.szCourseID;
@@ -43,6 +54,17 @@ Course::Course(const Course& other)
 }
 
 //Assignment Operator
+/*********************************************************************
+Course& operator=(const Course& other);
+Purpose:
+    Allocates new memory for the new object and deallocate the old memory
+Parameters:
+    const Course& other  -- the existing object
+Return Value:
+    Returns the new object
+Notes:
+    Deletes old data and copy new data
+*********************************************************************/
 Course& Course::operator=(const Course& other)
 {
     //avoid self-assignment
@@ -89,40 +111,60 @@ Notes:
 *********************************************************************/
 string Course::getCourseInfo()
 {
-    return szCourseID + ": " + szCourseName + "/nCapacity: " + to_string(iMaxStudents) + "/nEnrollment: " + to_string(iNumEnrolled); 
+    return szCourseID + ": " + szCourseName + 
+    "\nCapacity: " + to_string(iMaxStudents) + 
+    "\nEnrollment: " + to_string(iNumEnrolled) + "\n"; 
 }
 
 
 /*********************************************************************
 bool enrollStudent(const Student& newStudent);
 Purpose:
-    Return a string containing course ID and name, seperated by a colon with a space(: ) and capacity and enrollement eg: A00000000: Test Student.
+    Enroll the new student to the course and increase the number of students enrolled.
 Parameters:
-    - 
+    I Student& newStudent -- has the information about the new student for enrollment.
 Return Value:
-    Returns 
+    Returns true if the student is added is successfully or else returns false.
 Notes:
-    String concatenation has been used for the return.
+    -
 *********************************************************************/
-bool enrollStudent(const Student& newStudent)
+bool Course::enrollStudent(const Student& newStudent)
 {
-
+    if(iNumEnrolled >= iMaxStudents)
+    {
+        cout << "Max capacity reached. Please increase the course capacity before adding more students." << endl;
+        return false;
+    }
+    else
+    {
+        studentEnrolled[iNumEnrolled] = newStudent;
+        iNumEnrolled++;
+        return true;
+    }
 }
 
 
 /*********************************************************************
 void displayStudents();
 Purpose:
-    Return a string containing course ID and name, seperated by a colon with a space(: ) and capacity and enrollement eg: A00000000: Test Student.
+    Prints the course infromation and loops through the students to print their information too.
 Parameters:
     - 
 Return Value:
-    Returns the formatted string
+    N/A.
 Notes:
-    String concatenation has been used for the return.
+    Use the getCourseInfo() and getStudentInfor() function.
 *********************************************************************/
-void displayStudents()
+void Course::displayStudents()
 {
+    string szCourseInfo = getCourseInfo();
+    cout << szCourseInfo << endl;
+
+    for(int i=0; i<iNumEnrolled; i++)
+    {
+        string szStudentInfo = studentEnrolled[i].getStudentInfo();
+        cout << szStudentInfo << endl;
+    }
 
 }
 
@@ -130,15 +172,30 @@ void displayStudents()
 /*********************************************************************
 void increaseMaxEnrollment(int additionalCapacity);
 Purpose:
-    Return a string containing course ID and name, seperated by a colon with a space(: ) and capacity and enrollement eg: A00000000: Test Student.
+    Increases the size of the array and delete the old array and put in the new array in the same pointer.
 Parameters:
-    - 
+    I int additionalCapacity -- take in the additioanl capacity for the array
 Return Value:
     -
 Notes:
-    String concatenation has been used for the return.
+    Delete the old dynamicaly allocated array.
 *********************************************************************/
-void increaseMaxEnrollment(int additionalCapacity)
+void Course::increaseMaxEnrollment(int additionalCapacity)
 {
+    if (additionalCapacity <= 0) //if additional capacity is wrong 
+    {
+        return;
+    }
 
+    int iNewCapacity = iMaxStudents + additionalCapacity;
+    Student* newArray = new Student[iNewCapacity];
+
+    for (int i = 0; i < iNumEnrolled; ++i) {
+        newArray[i] = studentEnrolled[i];
+    }
+
+    delete[] studentEnrolled;  //delete the old dynamically allocated array
+    //copy the new array to the same array pointer 
+    studentEnrolled = newArray;
+    iMaxStudents = iNewCapacity;
 }

@@ -2,8 +2,8 @@
 
 /*********************************************************************
 File name: program3_driver.cpp
-Author: Dr.Patrick (ueg11)
-Date: 09/02/2025
+Author: Kripa Hayanju
+Date: 10/17/2025
 
 Purpose:
     Driver for program 3 to simulate course registration.
