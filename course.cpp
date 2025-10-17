@@ -95,6 +95,18 @@ Course& Course::operator=(const Course& other)
 
 
 //Destructor
+/*********************************************************************
+~Course()
+Purpose:
+    Deletes the dynamically allocated array.
+Parameters:
+    - 
+Return Value:
+    -
+Notes:
+    -
+*********************************************************************/
+
 Course::~Course()
 {
     delete[] studentEnrolled;
@@ -183,7 +195,7 @@ Parameters:
 Return Value:
     -
 Notes:
-    Delete the old dynamicaly allocated array.
+    Delete the old dynamically allocated array.
 *********************************************************************/
 void Course::increaseMaxEnrollment(int additionalCapacity)
 {
