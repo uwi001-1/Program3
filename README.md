@@ -1,6 +1,7 @@
 # Class Registration Simulation
 
 ## Overview
+
 This project is a C++ implementation of a simple course registration system. It demonstrates object-oriented programming concepts such as classes, constructors, copy constructors, assignment operators, dynamic memory management, and file processing.
 
 The program models courses and students, allowing students to be enrolled in courses while respecting maximum enrollment limits. It also reads course and student data from an input file and displays the processed information.
@@ -37,3 +38,49 @@ The program models courses and students, allowing students to be enrolled in cou
 - Display processed course information and enrollment summaries.
 
 ---
+
+
+## Program Flow
+
+The program performs the following steps:
+
+1. Checks that an input file is provided as a command-line argument.
+2. Tests the `Student` class constructors and member functions.
+3. Tests the `Course` class by:
+   - Creating course objects
+   - Enrolling students
+   - Checking enrollment limits
+   - Increasing course capacity
+   - Testing the copy constructor
+   - Testing the assignment operator
+4. Opens the specified input file.
+5. Processes course and student information from the file.
+6. Displays all processed courses and their enrolled students.
+7. Prints the total number of courses and students processed.
+
+---
+
+## Input Files
+
+The program accepts a text file containing course and student information.
+
+Included sample input files:
+
+- `course_and_student_data.txt`
+- `test_data.txt`
+
+---
+
+## Concepts Demonstrated
+
+- Object-Oriented Programming (OOP)
+- Classes and Objects
+- Constructors and Destructors
+- Copy Constructors
+- Assignment Operators
+- Dynamic Memory Management
+- Arrays of Objects
+- File Input (`ifstream`)
+- Command-Line Arguments
+- Modular Programming
+- Encapsulation
